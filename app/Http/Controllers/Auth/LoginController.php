@@ -97,7 +97,7 @@ class LoginController extends Controller
             auth()->login($newUser, true);
         }
 
-        $this->login_logs($login_id, '127.0.0.1', 'google');
+        $this->login_logs($login_id, \Request::ip(), 'google');
 
         return redirect()->to('/home');
     }
