@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 Route::prefix('auth')->group(function () {
+    Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+
     Route::get('/google', 'Auth\LoginController@redirectToGoogle');
     Route::get('/google-callback', 'Auth\LoginController@handleGoogleCallback');
 
@@ -25,6 +27,8 @@ Route::prefix('auth')->group(function () {
 
     Route::get('/facebook', 'Auth\LoginController@redirectToFacebook');
     Route::get('/facebook-callback', 'Auth\LoginController@handleFacebookCallback');
+
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
