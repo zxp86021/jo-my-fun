@@ -16,5 +16,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::prefix('auth')->group(function () {
+    Route::get('/google', 'Auth\LoginController@redirectToGoogle');
+    Route::get('/google-callback', 'Auth\LoginController@handleGoogleCallback');
+
+    Route::get('/twitter', 'Auth\LoginController@redirectToTwitter');
+    Route::get('/twitter-callback', 'Auth\LoginController@handleTwitterCallback');
+
+    Route::get('/facebook', 'Auth\LoginController@redirectToFacebook');
+    Route::get('/facebook-callback', 'Auth\LoginController@handleFacebookCallback');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
