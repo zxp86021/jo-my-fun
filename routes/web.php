@@ -31,4 +31,6 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
+Route::resource('stores', 'StoreController');
+
 Route::get('/home', 'HomeController@index')->name('home');
