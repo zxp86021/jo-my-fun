@@ -67,6 +67,7 @@
     <body>
         <div class="flex-center position-ref full-height">
             <div class="top-right links">
+                <a href="{{ url('/stores') }}">店家列表</a>
                 @auth
                     <a href="{{ url('/home') }}">Home</a>
                 @else

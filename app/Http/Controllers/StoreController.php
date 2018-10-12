@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Store;
+
 class StoreController extends Controller
 {
     /**
@@ -23,7 +25,11 @@ class StoreController extends Controller
      */
     public function index()
     {
-        //
+        $stores = Store::all();
+
+        return view('stores.index',[
+            'stores' => $stores
+        ]);
     }
 
     /**
@@ -33,7 +39,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        //
+        return view('stores.create');
     }
 
     /**
@@ -41,9 +47,31 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:191',
+            'address' => 'required|max:191',
+            'phone' => 'required|max:191'
+        ]);
+
+        $store = new Store();
+
+        $store->name = $request->name;
+
+        $store->address = $request->address;
+
+        $store->phone = $request->phone;
+
+        $store->latitude = '';
+
+        $store->longitude = '';
+
+        if ($store->save()) {
+            return redirect('/stores')->with('status', '201');
+        } else {
+            return redirect('/stores');
+        }
     }
 
     /**
