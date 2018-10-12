@@ -77,11 +77,16 @@ class StoreController extends Controller
     /**
      * Show the store detail page.
      *
+     * @param $store_id integer
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($store_id)
     {
-        //
+        $store = Store::find($store_id);
+
+        return view('stores.show',[
+            'store' => $store
+        ]);
     }
 
     /**
